@@ -1,0 +1,49 @@
+/* global delcalarations */
+:root {
+    --page-size: 5;
+    --page-width: calc(16*var(--page-size, 3));
+    --page-height: calc(10*var(--page-size, 3));
+}
+body {
+    background-color: darkslategray;
+    color: white;
+}
+/* table of contents
+    - 1 page container
+    - 2 page contents
+*/
+/* 1 - page container */
+.page {
+    background-color: forestgreen;
+    width: calc(var(--page-width, 48)*1rem);
+    height: calc(var(--page-height, 30)*1rem);
+    padding: 1rem;
+    display:grid;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-template:
+        "header"
+        "page-contents"
+        "footer";
+}
+/* 2 - page contents */
+.page-contents {
+    grid-area: page-contents;
+    background-color: palegoldenrod;
+}
+
+header, footer {
+    background-color: hotpink;
+}
+header {
+    grid-area: header;
+}
+footer {
+    grid-area: footer;
+}
+.lists {
+    background-color: mediumturquoise;
+}
+.buttons {
+    background-color: red;
+}
