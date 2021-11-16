@@ -28,7 +28,7 @@ body {
     width: calc(var(--page-width, 48)*1rem);
     height: calc(var(--page-height, 30)*1rem);
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr 3fr 1fr;
     grid-gap: 1rem;
 }
@@ -39,13 +39,15 @@ body {
     padding: 1rem;
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr;
     grid-gap: 1rem;
 }
 /* 2 a - header & footer */
 header, footer {
     background-color: palegoldenrod;
     border: 1px solid black;
+    height: 5rem;
+    width: auto;
 }
 header {
     align-self: start;
@@ -64,7 +66,7 @@ footer {
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr;
     grid-gap: 1rem;
 }
 .list {
@@ -72,7 +74,7 @@ footer {
     border: 1px solid black;
     padding: 1rem;
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(5,1fr);
     grid-gap: 1rem;
     text-align: center;
@@ -81,6 +83,10 @@ footer {
     background-color: orangered;
     border: 1px solid black;
     text-align: center;
+    cursor: move;
+}
+.list-item.dragging {
+    opacity: 0.5;
 }
 /* 2 c - menu */
 .menu {
@@ -88,7 +94,7 @@ footer {
     border: 1px solid black;
     padding: 1rem;
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 1fr;
     grid-template-rows: 7fr 3fr;
     grid-gap: 1rem;
 }
@@ -97,7 +103,7 @@ footer {
     border: 1px solid black;
     padding: 1rem;
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 1rem;
 }
