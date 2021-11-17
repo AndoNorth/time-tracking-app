@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/css/homepage_stylesheet.css">
+    <script src="src/js/time_tracking_app.js" defer></script>
     <script src="src/js/drag_n_drop_item.js" defer></script>
+    <script src="src/js/create_list_item.js" defer></script>
     <title>Homepage</title>
 </head>
 <body>
@@ -35,7 +37,15 @@
                     <div class="load-button button">load button</div>
                     <div class="create-item-button button">create new item</div>
                 </div>
-                <div class="new-item-description">item description</div>
+                <div class="new-item-form">
+                    new item description
+                    <form action="">
+                        <input type="text" id="form-item-name" name="item-name" value="New Item Name" placeholder="Enter Item Name">
+                        <label for="form-item-name">Item Name</label>
+                        <input type="checkbox" id="form-tag-work" name="tag">
+                        <label for="form-item-name">Item Name</label>
+                    </form>
+                </div>
             </div>
         </div>
         <footer>
