@@ -38,27 +38,29 @@ lists.forEach(list => {
 
 /*  get list item after held list item from hovered list 
         inputs: current hovered list, cursor Y position
-        outputs: 
+        outputs: list item closest to cursor Y position
 */
 function getItemAfterHeldItem(list, y) {
     /* get draggable list items, ignore elements with .draggin  */
-    const draggableListItems = [...list.querySelectorAll('.list-item:not(.draggin)')];
-    /* reduce array to one value */
-    draggableListItems.reduce((closest, child) => {
-        /* get div bounds for child */
-        const box = child.getBoundingClientRect();
+    const draggableListItems = [...list.querySelectorAll('.list-item:not(.dragging)')];
+    /* reduce: loop through array and delete values as you go */
+    return draggableListItems.reduce((closest, listItem) => {
+        /* get div bounds for list item */
+        const box = listItem.getBoundingClientRect();
         /* calculate the center of items inside list */
-        const offset = y - box.top - (box.height / 2); /* when below neg values, when above pos values */
-        /* if offset is negative && offset is greater negative than current closest item */
+        const offset = y - (box.top + (box.height / 2));
+        /* if offset is negative && offset is greater than current closest item */
         if (offset < 0 && offset > closest.offset)
         {
-            /* */
-            return { offset: offset, element: child }
+            /* return object with offset to closest for next iteration
+            and closest list item to closest */
+            return { offset: offset, listItem: listItem }
         }
         else 
         {
-            /* previous closest */
+            /* return closest */
             return closest
         }
-    }, {offset: Number.NEGATIVE_INFINITY }); /* initialise offset with max negative number */
+    }, {offset: Number.NEGATIVE_INFINITY }) /* initialise offset with max negative number */
+    .listItem; /* return only listItem, not offset */
 }
