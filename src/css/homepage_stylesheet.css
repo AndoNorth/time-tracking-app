@@ -29,7 +29,7 @@ body {
     height: calc(var(--page-height, 30)*1rem);
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows: 1.5fr 7.5fr 1fr;
     grid-gap: 1rem;
 }
 /* 2 - page contents */
@@ -46,8 +46,6 @@ body {
 header, footer {
     background-color: palegoldenrod;
     border: 1px solid black;
-    height: 5rem;
-    width: auto;
 }
 header {
     align-self: start;
