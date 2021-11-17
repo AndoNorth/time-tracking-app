@@ -1,3 +1,7 @@
+/* 
+    create new item
+    brief: this script will add a new item to todo-list with the new-item-form parameters
+*/
 createNewItemButton.addEventListener('click', () => {
     /* consider moving these to global scope */
     const todoList = document.querySelector('.todo-list')
