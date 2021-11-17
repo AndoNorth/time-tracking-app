@@ -2,22 +2,17 @@
     drag n drop items
     brief: this script lets users drag and drop list items between lists
 */
-const listItems = document.querySelectorAll('.list-item')
-const lists = document.querySelectorAll('.list')
 
-/* add dragging event listeners to list items */
-listItems.forEach(listItem => {
-    /* add dragging class to list item is picked up */
-    listItem.addEventListener('dragstart', () => {
-        listItem.classList.add('dragging');
-    });
-    /* remove dragging class from list item is dropped */
-    listItem.addEventListener('dragend', () => {
-        listItem.classList.remove('dragging');
-    });
+/* add dragging event listeners to list-items */
+addGlobalEventListener('dragstart', '.list-item', e =>{
+    e.target.classList.add('dragging')
+})
+addGlobalEventListener('dragend', '.list-item', e =>{
+    e.target.classList.remove('dragging')
 })
 
 /* iterate lists and decide where to add held list item */
+/* TODO: add guard clause for number of list items */
 lists.forEach(list => {
     list.addEventListener('dragover', e => {
         e.preventDefault(); /* default doesnt allow items to be dropped on dragover */
