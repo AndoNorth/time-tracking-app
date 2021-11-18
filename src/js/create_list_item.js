@@ -1,6 +1,5 @@
-/* 
-    create new item
-    brief: this script will add a new item to todo-list with the new-item-form parameters
+/* create new list item
+*  brief: this script will add a new item to todo-list with the new-item-form parameters
 */
 createNewItemButton.addEventListener('click', () => { noListItems = createNewListItem(todoList, noListItems); })
 

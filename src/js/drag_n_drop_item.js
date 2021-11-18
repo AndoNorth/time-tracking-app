@@ -1,6 +1,5 @@
-/* 
-    drag n drop items
-    brief: this script lets users drag and drop list items between lists
+/* drag n drop items
+*  brief: allow .list-items to be dragged and dropped between .lists
 */
 
 /* add dragging event listeners to list-items */

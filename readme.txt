@@ -4,7 +4,7 @@ Project Name:
 Description:
   an app where users can track tasks and log how much time is taken for each.
 
-function features:
+functional features:
   - create containers which store:
     - name
     - time (date, hours, minutes)

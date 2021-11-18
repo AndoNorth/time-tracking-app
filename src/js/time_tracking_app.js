@@ -5,6 +5,9 @@ const MAX_NO_LIST_ITEMS_PER_LIST = 4
 /* fixed objects */
 const lists = document.querySelectorAll('.list')
 const todoList = document.querySelector('.todo-list')
+/* buttons */
+const saveButton = document.querySelector('.save-button')
+const loadButton = document.querySelector('.load-button')
 const createNewItemButton = document.querySelector('.create-item-button')
 /* dynamic objects */
 let noListItems = document.querySelectorAll('.list-item').length
