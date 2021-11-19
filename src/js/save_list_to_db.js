@@ -1,16 +1,13 @@
 /* save list state
 *  brief: save list state to database
 */
-
-const testJson = { firstName: "Bob", lastName: "Kong"};
-
 saveButton.addEventListener('click', () => { saveListStateFetch(); })
 
 /* using Fetch API to make request to server */
-/* TODO: convert this to an async await */
 function saveListStateFetch(){
-    console.log('POST(Fetch): ' + JSON.stringify(testJson))
-    fetch('src/php/receive.php', {
+    let itemName = document.getElementsByClassName('.form-name').value;
+    const testJson = { firstName: "Bob", lastName: "Kong"};
+    fetch('src/php/connectToDB.php', {
         method: 'POST',
         body: JSON.stringify(testJson),
         headers: {
@@ -23,9 +20,25 @@ function saveListStateFetch(){
     .catch(error => console.error('ERROR: ' + error));
 }
 
-loadButton.addEventListener('click', () => { saveListStateAJAX(); })
+/* test asynchronous request/response APIs */
+const testJson = { firstName: "Bob", lastName: "Kong"};
+/* using Fetch API to make request to server */
+function testFetchAPI(){
+    console.log('POST(Fetch): ' + JSON.stringify(testJson))
+    fetch('src/php/receive.php', {
+        method: 'POST',
+        body: JSON.stringify(testJson),
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    })
+    .then(response => { return response.text(); /* returns text of response, can be replaced with .json() */ })
+    /* below is enacted on the returned response.text() */
+    .then((text) => console.log('RESPONSE: ' + text))
+    .catch(error => console.error('ERROR: ' + error));
+}
 /* using AJAX API to make request to server */
-function saveListStateAJAX(){
+function testAJAXAPI(){
     console.log('POST(Fetch): ' + JSON.stringify(testJson))
 	const xhr = new XMLHttpRequest();
 	

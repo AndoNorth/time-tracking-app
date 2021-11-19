@@ -15,7 +15,7 @@ function createNewListItem(list, noListItems){
     listItem.classList.add('draggable')
     listItem.draggable = true
     /* TODO: add list item description from new-item-form */
-    listItem.innerText = "item" + (noListItems)
+    listItem.innerText = `item${noListItems}`
     todoList.append(listItem)
     return noListItems
 }
