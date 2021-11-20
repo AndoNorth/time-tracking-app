@@ -18,7 +18,13 @@ body {
     - 2 page contents
         - a header & footer
         - b lists
+            - 1 specific lists
+            - 2 list items
         - c menu
+            - 1 buttons
+            - 2 specific buttons
+            - 3 create new item
+
 */
 /* 1 - page container */
 .page {
@@ -67,15 +73,25 @@ footer {
     grid-template-rows: 1fr;
     grid-gap: 1rem;
 }
+/* 2 b 1 - specific lists */
 .list {
     background-color: seagreen;
     border: 1px solid black;
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(5,1fr);
+    grid-template-rows: 2rem repeat(7, 1fr);
     grid-gap: 1rem;
     text-align: center;
+}
+.doing-list{
+    
+}
+.todo-list{
+
+}
+.done-list{
+/* 2 b 2 - list items */
 }
 .list-item {
     background-color: orangered;
@@ -96,6 +112,7 @@ footer {
     grid-template-rows: 7fr 3fr;
     grid-gap: 1rem;
 }
+/* 2 c 1 - buttons */
 .buttons {
     background-color: rebeccapurple;
     border: 1px solid black;
@@ -105,6 +122,7 @@ footer {
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 1rem;
 }
+/* 2 c 2 - specific buttons */
 .button {
     background-color: salmon;
     border: 1px solid black;
@@ -116,6 +134,7 @@ footer {
 .load-button {
     
 }
+/* 2 c 3 - create new item */
 .create-item-button {
 
 }

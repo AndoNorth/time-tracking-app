@@ -1,6 +1,6 @@
 /* time tracking app */
 /* constants */
-const MAX_NO_LIST_ITEMS_PER_LIST = 4
+const MAX_NO_LIST_ITEMS_PER_LIST = 7
 /* DOM objects */
 /* fixed objects */
 const lists = document.querySelectorAll('.list')

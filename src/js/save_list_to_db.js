@@ -6,7 +6,7 @@ saveButton.addEventListener('click', () => { saveListStateFetch(); })
 /* using Fetch API to make request to server */
 function saveListStateFetch(){
     let itemName = document.getElementsByClassName('.form-name').value;
-    const testJson = { firstName: "Bob", lastName: "Kong"};
+    const testJson = { firstName: "Bob", lastName: "Kong", age: 50};
     fetch('src/php/connectToDB.php', {
         method: 'POST',
         body: JSON.stringify(testJson),
@@ -21,7 +21,7 @@ function saveListStateFetch(){
 }
 
 /* test asynchronous request/response APIs */
-const testJson = { firstName: "Bob", lastName: "Kong"};
+const testJson = { firstName: "Bob", lastName: "Kong", age: 50};
 const uri = 'src/php/receive.php';
 /* using Fetch API to make request to server */
 function testFetchAPI(){
