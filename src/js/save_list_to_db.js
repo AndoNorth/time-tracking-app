@@ -22,27 +22,47 @@ function saveListStateFetch(){
 
 /* test asynchronous request/response APIs */
 const testJson = { firstName: "Bob", lastName: "Kong"};
+const uri = 'src/php/receive.php';
 /* using Fetch API to make request to server */
 function testFetchAPI(){
     console.log('POST(Fetch): ' + JSON.stringify(testJson))
-    fetch('src/php/receive.php', {
+    fetch(uri, {
         method: 'POST',
         body: JSON.stringify(testJson),
         headers: {
             'Content-Type' : 'application/json'
         }
     })
-    .then(response => { return response.text(); /* returns text of response, can be replaced with .json() */ })
-    /* below is enacted on the returned response.text() */
+    // handle response from the server
+    .then(response => { 
+        if(response.status == 200){
+            return response.text(); // can be .json()
+        }else{
+            throw new Error('Error Message');
+        }
+    })
     .then((text) => console.log('RESPONSE: ' + text))
-    .catch(error => console.error('ERROR: ' + error));
+    // error handling
+    .catch(error => console.error('ERROR: ' + error.message));
 }
+
 /* using AJAX API to make request to server */
 function testAJAXAPI(){
     console.log('POST(Fetch): ' + JSON.stringify(testJson))
 	const xhr = new XMLHttpRequest();
-	
-	xhr.open('POST', 'src/php/receive.php');
+	// open request - method, uri, is request asynchronous (default=true)
+	xhr.open('POST', uri, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
+    // handle the response from the server
+    xhr.addEventListener('load',function(response){
+        var data = response.responseTest; // or responseXML
+        var text = JSON.parse(data); // JSON object
+        console.log('RESPONSE: ' + text);
+    });
+    // error handling
+    xhr.addEventListener('error', function(error){
+        console.error('ERROR: ' + error);
+    })
+    // send request
     xhr.send(JSON.stringify(testJson));
 }
