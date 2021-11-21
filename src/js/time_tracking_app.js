@@ -40,11 +40,19 @@ function isListFull(list){
 function currentTime(){
     return new Date();
 }
+/* is value undefined */
+function isValueUndefined(val){
+    return typeof val == "undefined";
+}
 /* is key value pair value undefined */
 function isKVPUndefined(pair){
-    return typeof pair[1] == "undefined";
+    return isValueUndefined(pair[1]);
 }
 /* does string length exceed value */
 function doesStringLenExceedVal(string, maxVal){
     return string.length > maxVal;
+}
+/* check if object is empty */
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
 }

@@ -2,22 +2,31 @@
 *  brief: this script will add a new item to todo-list with the new-item-form parameters
 */
 createNewItemButton.addEventListener('click', () => {
-    new listItem = createNewListItemObject();
-    if(typeof listItem == "undefined"){
-        addListItemToList(todoList, listItem, listItems );
+    listItem = createNewListItemObject();
+    if(isValueUndefined(listItem)){ return; }
+    if(isEmpty(listItems[0])){
+        moveListItemToList(todoList, listItem, listItems)
+        listItems = [listItem];
+    }
+    else {
+        listItems = addListItemToList(todoList, listItem, listItems);
     }
 });
 
 /* attempt to move listItem to list */
 function moveListItemToList(list, listItem, listItems){
-    isListFull(list); // guard clause so lists dont exceed list limit
+    if (isListFull(list)) {return;} // guard clause so lists dont exceed list limit
+    console.log("list item aded to: " + list.id);
     /* set to new list */
     listItem.list = list.id;
 }
 /* attempt to add new item to listItems */
 function addListItemToList(list, listItem, listItems){
     moveListItemToList(list, listItem, listItems);
-    [...listItems, listItem];
+    console.log(listItems)
+    console.log(listItem)
+    console.log([...listItems, listItem])
+    return [...listItems, listItem];
 }
 
 /* convert formData to listItem Object, and return listItem */
