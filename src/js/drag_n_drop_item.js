@@ -4,11 +4,15 @@
 
 /* add dragging event listeners to list-items */
 addGlobalEventListener('dragstart', '.list-item', e =>{
-    e.target.classList.add('dragging')
-})
+    e.target.classList.add('dragging');
+    // if removed from doing list add entry to end time paired with start time
+});
 addGlobalEventListener('dragend', '.list-item', e =>{
-    e.target.classList.remove('dragging')
-})
+    e.target.classList.remove('dragging');
+    // if added to doing list add entry to start time
+    /* have some validator to check previous start time so you cant 
+    move list items quickly between lists */
+});
 
 /* iterate lists and decide where to add held list item */
 lists.forEach(list => {
@@ -18,7 +22,10 @@ lists.forEach(list => {
         e.preventDefault(); /* default doesnt allow items to be dropped on dragover */
         const afterElement = getItemAfterHeldItem(list, e.clientY);
         const listItemEle = document.querySelector('.dragging');
-        changeListOnListItem(list,findListItemByName(listItemEle.innerText, listItems) , listItems); // may need some robustness for finding listItem
+        if(findListItemByName(listItemEle.innerText, listItems).list != list.id ){
+            // may need some robustness for findListItemByName
+            changeListOnListItem(list,findListItemByName(listItemEle.innerText, listItems) , listItems);
+        }
         /* if no element after held item append to list */
         if(afterElement == null)
         {

@@ -14,7 +14,6 @@ const saveButton = document.querySelector('.save-button');
 const loadButton = document.querySelector('.load-button');
 const createNewItemButton = document.querySelector('.create-item-button');
 /** dynamic objects **/
-let noListItems = document.querySelectorAll('.list-item').length;
 let listItems = Array(Object());
 /** main app **/
 console.log(currentTime());
