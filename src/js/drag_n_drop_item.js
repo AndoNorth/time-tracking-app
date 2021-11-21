@@ -11,10 +11,11 @@ addGlobalEventListener('dragend', '.list-item', e =>{
 })
 
 /* iterate lists and decide where to add held list item */
+// TODO: update for new persistent itemLists array
 lists.forEach(list => {
     list.addEventListener('dragover', e => {
         const noItemsInlist = list.children.length
-        if (noItemsInlist >= MAX_NO_LIST_ITEMS_PER_LIST) {return}; // guard clause so lists dont exceed lsit limit
+        if (isListFull(list)) {return}; // guard clause so lists dont exceed list limit
         e.preventDefault(); /* default doesnt allow items to be dropped on dragover */
         const afterElement = getItemAfterHeldItem(list, e.clientY);
         const listItem = document.querySelector('.dragging');

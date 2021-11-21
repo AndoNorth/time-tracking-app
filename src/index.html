@@ -18,16 +18,16 @@
         </header>
         <div class="page-contents">
             <div class="lists">
-                <div class="doing-list list">
+                <div class="doing-list list" id="doing-list">
                     doing list
                     <div class="list-item draggable" draggable="true">item1</div>
                     <div class="list-item draggable" draggable="true">item2</div>
                 </div>
-                <div class="todo-list list">
+                <div class="todo-list list" id="todo-list">
                     todo list
                     <div class="list-item draggable" draggable="true">item3</div>
                 </div>
-                <div class="done-list list">
+                <div class="done-list list" id="done-list">
                     done list
                     <div class="list-item draggable" draggable="true">item4</div>
                 </div>
@@ -39,12 +39,31 @@
                     <div class="create-item-button button">create new item</div>
                 </div>
                 <div class="new-item-form">
-                    new item description
-                    <form action="">
-                        <input type="text" id="form-item-name" name="item-name" placeholder="Enter Item Name">
-                        <label for="form-item-name">Item Name</label>
-                        <input type="checkbox" id="form-tag-work" name="tag">
-                        <label for="form-item-name">Item Name</label>
+                    <form action="#" id="new-item-form">
+                        <fieldset>
+                            <legend>New Item Details</legend>
+                            <label for="form-item-name">Name</label>
+                            <input type="text" id="form-item-name" name="item-name" placeholder="Enter Item Name" value="New Item">
+                            <fieldset>
+                                <legend>Tags</legend>
+                                <input type="radio" id="form-tag-work" name="tag" value="Work">
+                                <label for="form-tag-work">Work</label>
+                                <input type="radio" id="form-tag-leisure" name="tag" value="Leisure">
+                                <label for="form-tag-leisure">Leisure</label>
+                                <input type="radio" id="form-tag-errand" name="tag" value="Errand">
+                                <label for="form-tag-errand">Errand</label>
+                                <br>
+                                <input type="radio" id="form-tag-chilling" name="tag" value="Chilling">
+                                <label for="form-tag-chilling">Chilling</label>
+                                <input type="radio" id="form-tag-other" name="tag" value="Other" checked>
+                                <label for="form-tag-other">Other</label>
+                            </fieldset>
+                            <label for="form-item-desc">Description</label>
+                            <textarea 
+                                form="new-item-form" name="item-desc" id="form-item-desc"
+                                placeholder="Enter Item Description"
+                                style="resize:none;" cols="30" rows="2" maxlength="40">Some Item Description</textarea>
+                        </fieldset>
                     </form>
                 </div>
             </div>
