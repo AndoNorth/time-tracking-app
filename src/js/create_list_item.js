@@ -5,7 +5,7 @@ createNewItemButton.addEventListener('click', () => {
     listItem = createNewListItemObject();
     if(isValueUndefined(listItem)){ return; }
     if(isEmpty(listItems[0])){
-        moveListItemToList(todoList, listItem, listItems)
+        changeListOnListItem(todoList, listItem, listItems)
         listItems = [listItem];
     }
     else {
@@ -14,18 +14,17 @@ createNewItemButton.addEventListener('click', () => {
 });
 
 /* attempt to move listItem to list */
-function moveListItemToList(list, listItem, listItems){
-    if (isListFull(list)) {return;} // guard clause so lists dont exceed list limit
+function changeListOnListItem(list, listItem, listItems){
+    if (isListFull(list)) {return 1;} // guard clause so lists dont exceed list limit
     console.log("list item aded to: " + list.id);
     /* set to new list */
     listItem.list = list.id;
+    return 0;
 }
-/* attempt to add new item to listItems */
+/* attempt to add new item to listItems, returns a new array of listItems*/
 function addListItemToList(list, listItem, listItems){
-    moveListItemToList(list, listItem, listItems);
-    console.log(listItems)
-    console.log(listItem)
-    console.log([...listItems, listItem])
+    if(changeListOnListItem(list, listItem, listItems)) { return listItems; }
+    addListItemEleToList(todoList, listItem);
     return [...listItems, listItem];
 }
 
@@ -38,7 +37,18 @@ function createNewListItemObject(){
     console.log("item created");
     return listItem;
 }
-
+/* create and add list item element to list - affects the DOM */
+function addListItemEleToList(list, listItem){
+    // create list item element
+    let listItemEle = document.createElement("div");
+    listItemEle.classList.add('list-item');
+    listItemEle.classList.add('draggable');
+    listItemEle.draggable = true;
+    // fill html elements with values
+    listItemEle.innerText = listItem['item-name'];
+    console.log("item added to DOM");
+    list.append(listItemEle);
+}
 /* validate form data, return 0 if successful, else return 1 */
 function validateFormData(entries){
     // loop through formData
