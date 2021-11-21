@@ -30,11 +30,20 @@ function addGlobalEventListener(type, selector, callback) {
 }    
 /* guard clause so lists dont exceed list limit */
 function isListFull(list){
+    if (typeof list.children === "undefined"){ return 0; }
     if (list.children.length >= MAX_NO_LIST_ITEMS_PER_LIST) {
         console.log("error: list is full");
         return 1;
     }
     return 0;
+}
+/* find list item by name */
+function findListItemByName(itemName, listItems){
+    return listItems.filter((item) => {return item['item-name'] === itemName})[0];
+}
+/* does list item exist, if 0 then does not exist */
+function doesListItemAlreadyExist(listItem, listItems){
+    return listItems.filter((item) => {return item['item-name'] === listItem['item-name']}).length;
 }
 /* return current date time */
 function currentTime(){

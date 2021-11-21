@@ -18,16 +18,17 @@ lists.forEach(list => {
         if (isListFull(list)) {return}; // guard clause so lists dont exceed list limit
         e.preventDefault(); /* default doesnt allow items to be dropped on dragover */
         const afterElement = getItemAfterHeldItem(list, e.clientY);
-        const listItem = document.querySelector('.dragging');
+        const listItemEle = document.querySelector('.dragging');
+        changeListOnListItem(list,findListItemByName(listItemEle.innerText, listItems) , listItems); // may need some robustness for finding listItem
         /* if no element after held item append to list */
         if(afterElement == null)
         {
-            list.appendChild(listItem);
+            list.appendChild(listItemEle);
         }
         /* else insert element before element after held item */
         else 
         {
-            list.insertBefore(listItem, afterElement);
+            list.insertBefore(listItemEle, afterElement);
         }
     })
 })

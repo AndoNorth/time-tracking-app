@@ -3,10 +3,11 @@
 */
 createNewItemButton.addEventListener('click', () => {
     listItem = createNewListItemObject();
-    if(isValueUndefined(listItem)){ return; }
+    if(isValueUndefined(listItem) || listItem === null){ return; }
     if(isEmpty(listItems[0])){
         changeListOnListItem(todoList, listItem, listItems)
         listItems = [listItem];
+        addListItemEleToList(todoList, listItem);
     }
     else {
         listItems = addListItemToList(todoList, listItem, listItems);
@@ -34,6 +35,10 @@ function createNewListItemObject(){
     const formData = new FormData(formEle);
     if(validateFormData(formData.entries())) { return null; };
     listItem = Object.fromEntries(formData.entries());
+    if(doesListItemAlreadyExist(listItem, listItems)) {
+        console.log("error: item name already exists in current session")
+        return null;
+    }
     console.log("item created");
     return listItem;
 }
