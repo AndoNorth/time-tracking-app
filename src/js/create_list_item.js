@@ -89,21 +89,3 @@ function validateFormData(entries){
     }
     return 0;
 }
-
-/* test creating a new list item and appending it to list element */
-function createNewListItemTest(list, noListItems){
-    const noItemsInlist = list.children.length
-    if (noItemsInlist >= MAX_NO_LIST_ITEMS_PER_LIST) {
-        console.log(`error: maxNoList for list maxNo: ${MAX_NO_LIST_ITEMS_PER_LIST}`)
-        return noListItems
-    }
-    noListItems++
-    let listItem = document.createElement("div")
-    listItem.classList.add('list-item')
-    listItem.classList.add('draggable')
-    listItem.draggable = true
-    /* TODO: add list item description from new-item-form */
-    listItem.innerText = `item${noListItems}`
-    todoList.append(listItem)
-    return noListItems
-}

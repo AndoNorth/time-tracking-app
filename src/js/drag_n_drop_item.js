@@ -11,7 +11,6 @@ addGlobalEventListener('dragend', '.list-item', e =>{
 })
 
 /* iterate lists and decide where to add held list item */
-// TODO: update for new persistent itemLists array
 lists.forEach(list => {
     list.addEventListener('dragover', e => {
         const noItemsInlist = list.children.length

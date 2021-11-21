@@ -65,3 +65,66 @@ function doesStringLenExceedVal(string, maxVal){
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
+
+/** test scripts **/
+/* test creating a new list item and appending it to list element */
+function createNewListItemTest(list, noListItems){
+    const noItemsInlist = list.children.length
+    if (noItemsInlist >= MAX_NO_LIST_ITEMS_PER_LIST) {
+        console.log(`error: maxNoList for list maxNo: ${MAX_NO_LIST_ITEMS_PER_LIST}`);
+        return noListItems;
+    }
+    noListItems++;
+    let listItem = document.createElement("div");
+    listItem.classList.add('list-item');
+    listItem.classList.add('draggable');
+    listItem.draggable = true;
+    listItem.innerText = `item${noListItems}`;
+    todoList.append(listItem)
+    return noListItems
+}
+/* test asynchronous request/response APIs */
+const testJson = { firstName: "Bob", lastName: "Kong", age: 50};
+const uri = 'src/php/receive.php';
+/* using Fetch API to make request to server */
+function testFetchAPI(){
+    console.log('POST(Fetch): ' + JSON.stringify(testJson));
+    fetch(uri, {
+        method: 'POST',
+        body: JSON.stringify(testJson),
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    })
+    // handle response from the server
+    .then(response => { 
+        if(response.status == 200){
+            return response.text(); // can be .json()
+        }else{
+            throw new Error('Error Message');
+        }
+    })
+    .then((text) => console.log('RESPONSE: ' + text))
+    // error handling
+    .catch(error => console.error('ERROR: ' + error.message));
+}
+/* using AJAX API to make request to server */
+function testAJAXAPI(){
+    console.log('POST(AJAX): ' + JSON.stringify(testJson));
+	const xhr = new XMLHttpRequest();
+	// open request - method, uri, is request asynchronous (default=true)
+	xhr.open('POST', uri, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+    // handle the response from the server
+    xhr.addEventListener('load',function(response){
+        var data = response.responseTest; // or responseXML
+        var text = JSON.parse(data); // JSON object
+        console.log('RESPONSE: ' + text);
+    });
+    // error handling
+    xhr.addEventListener('error', function(error){
+        console.error('ERROR: ' + error);
+    })
+    // send request
+    xhr.send(JSON.stringify(testJson));
+}
