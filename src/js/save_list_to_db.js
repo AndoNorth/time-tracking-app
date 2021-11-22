@@ -1,7 +1,7 @@
 /* save list state
 *  brief: save list state to database
 */
-saveButton.addEventListener('click', () => { saveListStateFetch(); });
+saveButton.addEventListener('click', () => { saveListItemsToLS(); });
 
 /* using Fetch API to make request to server */
 function saveListStateFetch(){
@@ -18,4 +18,15 @@ function saveListStateFetch(){
     /* below is enacted on the returned response.text() */
     .then((text) => console.log('RESPONSE: ' + text))
     .catch(error => console.error('ERROR: ' + error));
+}
+
+/* save list items to local storage */
+function saveListItemsToLS(){
+    localStorage.setItem('listItems', JSON.stringify(listItems));
+    console.log('listItems saved to local storage');
+}
+/* save list items to session storage */
+function saveListItemsToSS(){
+    sessionStorage.setItem('listItems', JSON.stringify(listItems));
+    console.log('listItems saved to session storage');
 }
