@@ -2,10 +2,11 @@
 *  brief: this script will add a new item to todo-list with the new-item-form parameters
 */
 createNewItemButton.addEventListener('click', () => {
-    listItem = createNewListItemObject();
+    let listItem = createNewListItemObject();
     if(isValueUndefined(listItem) || listItem === null){ return; }
-    if(isEmpty(listItems[0])){
-        changeListOnListItem(todoList, listItem, listItems)
+    if(isEmpty(listItems[0]) || isValueUndefined(listItems[0] || isValueUndefined(listItems))){
+        // initialise listItems with listItem
+        changeListOnListItem(todoList, listItem)
         listItems = [listItem];
         addListItemEleToList(todoList, listItem);
     }
@@ -13,28 +14,26 @@ createNewItemButton.addEventListener('click', () => {
         listItems = addListItemToList(todoList, listItem, listItems);
     }
 });
-
 /* attempt to move listItem to list */
-function changeListOnListItem(list, listItem, listItems){
+function changeListOnListItem(list, listItem){
     if (isListFull(list)) {return 1;} // guard clause so lists dont exceed list limit
-    console.log("list item aded to: " + list.id);
+    console.log(`list item (${listItem['item-name']}) added to "${list.id}"`);
     /* set to new list */
     listItem.list = list.id;
     return 0;
 }
 /* attempt to add new item to listItems, returns a new array of listItems*/
 function addListItemToList(list, listItem, listItems){
-    if(changeListOnListItem(list, listItem, listItems)) { return listItems; }
+    if(changeListOnListItem(list, listItem)) { return listItems; }
     addListItemEleToList(todoList, listItem);
     return [...listItems, listItem];
 }
-
 /* convert formData to listItem Object, and return listItem */
 function createNewListItemObject(){
     const formEle = document.getElementById('new-item-form');
     const formData = new FormData(formEle);
     if(validateFormData(formData.entries())) { return null; };
-    listItem = Object.fromEntries(formData.entries());
+    let listItem = Object.fromEntries(formData.entries());
     if(doesListItemAlreadyExist(listItem, listItems)) {
         console.log("error: item name already exists in current session")
         return null;

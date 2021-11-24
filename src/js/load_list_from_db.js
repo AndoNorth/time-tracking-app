@@ -1,14 +1,23 @@
 /* load list state
 *  brief: load list state from database
 */
+// when load button is clicked
 loadButton.addEventListener('click', () => {
     loadListItemsFromLS();
     refreshListState();
     });
-
 /* load list items from local storage */
 function loadListItemsFromLS(){
     listItems = JSON.parse(localStorage.getItem('listItems'));
+    // listItems.forEach(listItem => {
+    //     const timeStamps = listItem['time-stamps'];
+    //     if(isValueUndefined(timeStamps)){ return; }
+    //     timeStamps.forEach(timeStamp =>{
+    //         Object.keys(timeStamp).forEach(key => {
+    //             Date.parse(datetime);
+    //         });
+    //     });
+    // });
     console.log('listItems loaded from local storage');
 }
 /* load list items from session storage */

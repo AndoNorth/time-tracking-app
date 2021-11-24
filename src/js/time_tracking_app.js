@@ -3,6 +3,8 @@
 const MAX_NO_LIST_ITEMS_PER_LIST = 7;
 const MAX_LIST_NAME_LENGTH = 15;
 const MAX_LIST_DESC_LENGTH = 40;
+// min time is list to incur a time stamp
+const MIN_TIME_IN_LIST = 1000*60*1; // 1000ms, 60 seconds, 1 minutes
 /**  DOM objects **/
 /* fixed objects */
 const lists = document.querySelectorAll('.list');
@@ -14,7 +16,7 @@ const saveButton = document.querySelector('.save-button');
 const loadButton = document.querySelector('.load-button');
 const createNewItemButton = document.querySelector('.create-item-button');
 /** dynamic objects **/
-let listItems = Array(Object());
+let listItems = Array();
 /** main app **/
 console.log(currentTime());
 /** global functions **/
@@ -46,7 +48,12 @@ function doesListItemAlreadyExist(listItem, listItems){
 }
 /* return current date time */
 function currentTime(){
-    return new Date();
+    x = new Date();
+    let hoursDiff = x.getHours() - x.getTimezoneOffset() / 60;
+    let minutesDiff = (x.getHours() - x.getTimezoneOffset()) % 60;
+    x.setHours(hoursDiff);
+    x.setMinutes(minutesDiff);
+    return x;
 }
 /* is value undefined */
 function isValueUndefined(val){
@@ -64,7 +71,6 @@ function doesStringLenExceedVal(string, maxVal){
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
-
 /** test scripts **/
 /* test creating a new list item and appending it to list element */
 function createNewListItemTest(list, noListItems){

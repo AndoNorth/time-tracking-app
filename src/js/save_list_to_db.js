@@ -1,8 +1,8 @@
 /* save list state
 *  brief: save list state to database
 */
+// when save button is clicked
 saveButton.addEventListener('click', () => { saveListItemsToLS(); });
-
 /* using Fetch API to make request to server */
 function saveListStateFetch(){
     let itemName = document.getElementsByClassName('.form-name').value;
@@ -19,7 +19,6 @@ function saveListStateFetch(){
     .then((text) => console.log('RESPONSE: ' + text))
     .catch(error => console.error('ERROR: ' + error));
 }
-
 /* save list items to local storage */
 function saveListItemsToLS(){
     localStorage.setItem('listItems', JSON.stringify(listItems));
