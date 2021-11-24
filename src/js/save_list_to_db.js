@@ -2,7 +2,7 @@
 *  brief: save list state to database
 */
 // when save button is clicked
-saveButton.addEventListener('click', () => { saveListItemsToLS(); });
+saveButton.addEventListener('click', () => { /*saveListItemsToLS();*/ testFetchAPI(); });
 /* using Fetch API to make request to server */
 function saveListStateFetch(){
     let itemName = document.getElementsByClassName('.form-name').value;
