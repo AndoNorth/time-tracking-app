@@ -1,7 +1,16 @@
 <?php
-/* basic script to see POST body(data) */
+/* basic script to test receiving request from server
+*  contents:
+*    1. test receiving POST request data
+*    2. test writing functionality 
+*    3. test reading functionality 
+*/
+// 1. test receiving POST request data
 $request = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents('php://input'), true);
+echo "data received:\n";
+var_dump($data);
+// 2. test writing functionality
 $dir = '../../data';
 if( !file_exists($dir) ) {
     mkdir ($dir, 0664); // 0664 = -rw-rw-r--
@@ -12,8 +21,8 @@ if( !file_exists($dir) ) {
 $jsonFileName = "listItems.json";
 $outPath = $dir.'/'.$jsonFileName;
 $jsonData = json_encode($data, JSON_PRETTY_PRINT);
-$bytes = file_put_contents($outPath, $jsonData);
-if($bytes)
+$outToFile = file_put_contents($outPath, $jsonData);
+if($outToFile)
 {
     echo "successfully written to $outPath\n";
 }
@@ -21,8 +30,7 @@ else
 {
     echo "failed to write to $outPath\n";
 }
-echo "data received:\n";
-var_dump($data);
+// 3. test reading functionality
 $loadedData = json_decode(file_get_contents($outPath), true);
 echo "data loaded from $outPath:\n";
 var_dump($loadedData);
