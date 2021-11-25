@@ -2,12 +2,12 @@
 *  brief: save list state to database
 */
 // when save button is clicked
-saveButton.addEventListener('click', () => { /*saveListItemsToLS();*/ saveListStateFetch(); });
+saveButton.addEventListener('click', () => { saveListItemsToLS(); });
 /* using Fetch API to make request to server */
 function saveListStateFetch(){
     let itemName = document.getElementsByClassName('.form-name').value;
     const testJson = { firstName: "Bob", lastName: "Kong", age: 50};
-    fetch('src/php/addJSONToDB.php', {
+    fetch('src/php/addListItemToDB.php', {
         method: 'POST',
         body: JSON.stringify(testJson),
         headers: {

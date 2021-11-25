@@ -1,19 +1,21 @@
 <?php
 /* addJSONToDB
-*  brief: from POST request make query to add test JSON to DB
+*  brief: from POST request make query to load test data from DB
 */
 // database credentials
 $serverName = "localhost";
 $userName = "mysqluser";
 $password = "password123";
 $dbName = "test";
-// test connection & POST data integrity
+// connectToDB and load table data
 $data = checkPOSTIntegrity();
 $conn = createConnectionToDB($serverName, $userName, $password, $dbName);
 var_dump($data);
 $query = parseDataToQueryString($data);
-runQuery($conn, $query);
+$run = runQuery($conn, $query);
+showQueryData($run);
 $conn->close();
+
 /* create connetion to DB */
 function createConnectionToDB($serverName, $userName, $password, $dbName){
     $conn = mysqli_connect($serverName, $userName, $password, $dbName);
@@ -30,7 +32,8 @@ function createConnectionToDB($serverName, $userName, $password, $dbName){
 function runQuery($conn, $query) {
     $run = mysqli_query($conn, $query) or die(mysqli_error());
     if($run){
-        echo "data added to DB\n";
+        echo "data loaded from DB\n";
+        return $run;
     }
     else {
         echo "query error : " . mysqli_error() . "\n";
@@ -68,31 +71,25 @@ function checkDataIntegrity($data){
 /* parse data to query string */
 function parseDataToQueryString($data){
     $keys = join(', ',array_keys($data));
-    $valuesArray = array_values($data);
-    $values = '';
-    foreach($valuesArray as $value)
-    {
-      $type = gettype($value);
-      if($values)
-      {
-        $values = $values.', ';
-      }
-      if( $type == 'string' )
-      {
-        $values = $values.'"'.$value.'"';
-      }
-      elseif( $type == 'integer' )
-      {
-        $values = $values.$value;
-      }
-      else 
-      {
-        echo 'error: wrong type';
-      }
-    }
     $table = "test";
-    $query = "INSERT INTO $table ($keys) VALUES($values);";
+    $query = "SELECT $keys FROM $table";
     echo "mySQL Query: $query\n";
     return $query;
+}
+
+/* echo query data */
+function showQueryData($run){
+    if($run->num_rows > 0){ // mysqli_num_rows($run) > 0
+        // output data of each row
+        while($row = $run->fetch_assoc()){ // $row = mysqli_fetch_assoc($run)
+            echo "id:".$row["id"].
+            " - firstName: ".$row["firstName"].
+            " - lastName: ".$row["lastName"].
+            " - age: ".$row["age"]."\n";
+        }
+    }
+    else{
+        echo "database is empty\n";
+    }
 }
 ?>
