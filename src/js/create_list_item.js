@@ -4,7 +4,7 @@
 createNewItemButton.addEventListener('click', () => {
     let listItem = createNewListItemObject();
     if(isValueUndefined(listItem) || listItem === null){ return; }
-    if(isEmpty(listItems[0]) || isValueUndefined(listItems[0] || isValueUndefined(listItems))){
+    if(isEmpty(listItems) || isValueUndefined(listItems[0] || isValueUndefined(listItems))){
         // initialise listItems with listItem
         changeListOnListItem(todoList, listItem)
         listItems = [listItem];
@@ -52,6 +52,7 @@ function addListItemEleToList(list, listItem){
     listItemEle.innerText = listItem['item-name'];
     console.log("item added to DOM");
     list.append(listItemEle);
+    resetFormData();
 }
 /* validate form data, return 0 if successful, else return 1 */
 function validateFormData(entries){
@@ -87,4 +88,9 @@ function validateFormData(entries){
         }
     }
     return 0;
+}
+/* reset form data */
+function resetFormData(){
+    const form = document.getElementById('new-item-form');
+    form.reset();
 }
