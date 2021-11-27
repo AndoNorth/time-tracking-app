@@ -16,12 +16,17 @@ addGlobalEventListener('dragstart', '.list-item', e =>{
         // if timeStamps is undefined or empty, add new timeStamp
         if(isValueUndefined(timeStamps) || timeStamps.length == 0){return;}
         // remove the last value out of timeStamps, and set timeStamp equal to it
-        const timeStamp = timeStamps.pop();
+        let timeStamp = timeStamps.pop();
         // if min time has passed, then add endTime to timeStamp and append to the end of timeStamps
-        if(Math.abs((currentTime() - timeStamp.startTime)) > MIN_TIME_IN_LIST){
+        const endTime = new Date(currentTime()); // create new date object so difference can be calculated
+        const startTime = new Date(timeStamp.startTime);
+        const timeDiff = Math.abs(endTime - startTime);
+        if( timeDiff > MIN_TIME_IN_LIST){
             timeStamp.endTime = currentTime();
             timeStamps.push(timeStamp);
+            console.log(`time started: ${startTime} - time ended: ${endTime}`);
         }
+        else{ console.log(`time stamp removed`); }
         //console.log(`timeStampsAfter:${JSON.stringify([...timeStamps])}`); // DEBUG POINT
         listItem['time-stamps'] = timeStamps;
     }

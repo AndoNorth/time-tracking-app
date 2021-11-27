@@ -48,12 +48,13 @@ function doesListItemAlreadyExist(listItem, listItems){
 }
 /* return current date time */
 function currentTime(){
-    x = new Date();
-    let hoursDiff = x.getHours() - x.getTimezoneOffset() / 60;
-    let minutesDiff = (x.getHours() - x.getTimezoneOffset()) % 60;
-    x.setHours(hoursDiff);
-    x.setMinutes(minutesDiff);
-    return x;
+    let x = new Date();
+    // x.toString(); // local time for string representation
+    // expected output: Wed Oct 05 2011 16:48:00 GMT+0200 (CEST)
+    // (note: your timezone may vary)
+    // x.toISOString()); // ISO-8601 format for JSON saving
+    // expected output: 2011-10-05T14:48:00.000Z
+    return x.toISOString();
 }
 /* is value undefined */
 function isValueUndefined(val){
