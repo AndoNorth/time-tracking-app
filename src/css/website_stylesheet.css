@@ -169,3 +169,13 @@ footer {
     display: flex;
     flex-wrap: wrap;
 }
+/* 2 d - log in page */
+/* 2 d 1 - log in form */
+.login-form{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-wrap: wrap;
+}
