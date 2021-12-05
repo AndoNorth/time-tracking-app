@@ -45,6 +45,24 @@
             var jwt = `${base64Header}.${base64Payload}.${base64Sig}`;
             resultJWT.innerText = jwt;
         }
+        function decodeJWT(){
+            var txtJWT = document.getElementById("txtJWT");
+            var txtDecodeSecret = document.getElementById("txtDecodeSecret");
+            var resultJWTHeader = document.getElementById("resultJWTHeader");
+            var resultJWTBody = document.getElementById("resultJWTBody");
+            var resultSignature = document.getElementById("resultSignature");
+
+            var [base64Header, base64Payload, base64Signature] = txtJWT.value.split('.');
+            var [jwtHeader, jwtPayload] =
+            [base64Header, base64Payload].map(base64string=>getBase64Decoded(base64string));
+            var jwtSignatureRef = CryptoJS.enc.Base64.stringify(
+                CryptoJS.HmacSHA256(`${base64Header}.${base64Payload}`, txtDecodeSecret.value));
+            var jwtSignature = base64Signature == jwtSignatureRef;
+            //array.forEach(element => console.log(element));
+            resultJWTHeader.innerText = jwtHeader;
+            resultJWTBody.innerText = jwtPayload;
+            resultSignature.innerText = jwtSignature;
+        }
     </script>
 </head>
 <body>
@@ -95,6 +113,40 @@
             <td>Result: </td>
             <td>
                 <div id="resultJWT" style="width: 600px; overflow-wrap: break-word"></div>
+            </td>
+        </tr>
+    </table>
+    <hr>
+
+    <table>
+        <tr>
+            <td>Enter JWT:</td>
+            <td><input type="text" id="txtJWT" value=''></td>
+        </tr>
+        <tr>
+            <td>Enter hash signature secret/password:</td>
+            <td><input type="text" id="txtDecodeSecret" value='Sack'></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button onclick="decodeJWT()">Decode JWT</button></td>
+        </tr>
+        <tr>
+            <td>JWTHeader: </td>
+            <td>
+                <div id="resultJWTHeader" style="width: 600px; overflow-wrap: break-word"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>JWTBody: </td>
+            <td>
+                <div id="resultJWTBody" style="width: 600px; overflow-wrap: break-word"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>JWTSignature: </td>
+            <td>
+                <div id="resultSignature" style="width: 600px; overflow-wrap: break-word"></div>
             </td>
         </tr>
     </table>

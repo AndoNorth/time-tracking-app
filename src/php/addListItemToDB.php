@@ -7,7 +7,7 @@ $serverName = "localhost";
 $userName = "mysqluser";
 $password = "password123";
 $dbName = "test";
-$secret = 'spicyrice';// JWT secret
+$secret = 'SpicyRice';// JWT secret
 // test connection & POST data integrity
 $data = checkPOSTIntegrity();
 $conn = createConnectionToDB($serverName, $userName, $password, $dbName);
@@ -27,7 +27,6 @@ function createConnectionToDB($serverName, $userName, $password, $dbName){
         return $conn;
     }
 }
-
 /* query DB */
 function runQuery($conn, $query) {
     $run = mysqli_query($conn, $query) or die(mysqli_error());
@@ -39,8 +38,8 @@ function runQuery($conn, $query) {
     }
 }
 /** Data validation **/
-/* check POST integrity */
-function checkPOSTIntegrity(){
+/* check request type */
+function checkRequestType(){
     // check if request is POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -53,13 +52,15 @@ function checkPOSTIntegrity(){
             exit("error: empty POST request\n");
         }
     }
+    elseif ($_SERVER['REQUEST_METHOD'] === 'GET'){
+        // request JWT
+    }
     else{
-        exit("error: not POST request\n");
+        exit("error: bad request\n");
     }
 }
-/* check POST data(body) is correct for DB */
-function checkDataIntegrity($data){
-    echo "test POST body: \n";
+/* loop through data */
+function dataValidation($data){
     // gettype(value) - returns string
     foreach($data as $key => $value){
         echo "key : $key, value : $value\n";
@@ -105,18 +106,27 @@ function validateLoginCredentials(){
 /* create JWT for user - SHA256 encoding */
 function createJWT($username, $userid, $secret){
     $header = json_encode(['typ'=>'JWT', 'alg'=>'HS256']); // { "typ": "JWT",   "alg": "HS256" }
-    $payload = json_encode(['username' => $username]); // { "username": "Jamal" }
-    $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
-    $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
-    $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, $secret, true);
-    $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
-    $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
+    $payload = json_encode(['username' => $username, 'userid' => $userid]); // { "username": "Jamal", "userid": 0}
+    $utf8header = utf8_encode($header);
+    $utf8payload = utf8_encode($payload);
+    $base64Header = base64_encode($utf8header);
+    $base64Payload = base64_encode($utf8payload);
+    $signature = hash_hmac('sha256', $base64Header . "." . $base64Payload, $secret, true);
+    $base64Signature = base64_encode($signature);
+    $jwt = $base64Header . "." . $base64Payload . "." . $base64Signature;
     return $jwt;
 }
 /* decode JWT token */
-function decodeJWT($JWT, $secret){
-    $jsonObject = base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $token)[1])));
-    $decodedJWT = json_decode($jsonObject);
-    // return yes or no
+function decodeJWT($token, $secret){
+    list($base64header, $base64payload, $base64signature) = explode('.', $token);
+    $utf8header = base64_decode($base64header);
+    $utf8payload = base64_decode($base64payload);
+    $jsonheader = utf8_decode($utf8header);
+    $jsonpayload = utf8_decode($utf8payload);
+    $header = json_decode($jsonheader);
+    $payload = json_decode($jsonpayload);
+    $jwtSignatureRef = hash_hmac('sha256', $base64Header . "." . $base64Payload, $secret, true);
+    $jwtValid = strcmp($base64signature, $jwtSignatureRef);
+    return $jwtValid;
 }
 ?>
