@@ -73,7 +73,7 @@ function emailExists($conn, $email){
         header("location: /src/php/signup.php?error=stmtfailedemail");
         exit();
     }
-    mysqli_stmt_bind_param($stmt, "s", $username); // ss = string string, if more add more others exist
+    mysqli_stmt_bind_param($stmt, "s", $email); // ss = string string, if more add more others exist
     mysqli_stmt_execute($stmt);
     $resultData = mysqli_stmt_get_result($stmt);
     if($row = mysqli_fetch_assoc($resultData)){

@@ -1,7 +1,7 @@
 <?php include_once 'header.php';?>
 <div class="page-contents">
     <section class="signup-form">
-        <form action="signup-inc.php" method="post">
+        <form action="/src/php/signup-inc.php" method="post">
             <input type="text" name="firstName" placeholder="First Name...">
             <input type="text" name="lastName" placeholder="Last Name...">
             <input type="text" name="email" placeholder="Email...">

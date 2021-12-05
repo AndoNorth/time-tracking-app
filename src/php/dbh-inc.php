@@ -11,7 +11,7 @@ function createConnectionToDB($serverName, $dbUserName, $dbPassword, $dbName){
     $conn = mysqli_connect($serverName, $dbUserName, $dbPassword, $dbName);
 
     if(mysqli_connect_errno()){
-        echo "error connecting :" . mysql_connect_error() . "\n";
+        echo "error connecting :" . mysqli_connect_error() . "\n";
         exit();
     }
     else {
