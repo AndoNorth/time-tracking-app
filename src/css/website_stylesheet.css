@@ -17,14 +17,16 @@ body {
     - 1 page container
     - 2 page contents
         - a header & footer
-        - b lists
-            - 1 specific lists
-            - 2 list items
-        - c menu
-            - 1 buttons
-            - 2 specific buttons
-            - 3 create new item
-
+        - b time tracking app
+            - 1 lists
+                - a specific lists
+                - b list items
+            - 2 menu
+                - a buttons
+                - b specific buttons
+                - c create new item
+        - c sign up page
+            - 1 sign up form
 */
 /* 1 - page container */
 .page {
@@ -76,7 +78,8 @@ footer {
     text-align: right;
     padding: 1rem;
 }
-/* 2 b - lists */
+/* 2 b - time tracking app */
+/* 2 b 1 - lists */
 .lists {
     background-color: red;
     border: 1px solid black;
@@ -86,7 +89,7 @@ footer {
     grid-template-rows: 1fr;
     grid-gap: 1rem;
 }
-/* 2 b 1 - specific lists */
+/* 2 b 1 a - specific lists */
 .list {
     background-color: seagreen;
     border: 1px solid black;
@@ -104,7 +107,7 @@ footer {
 
 }
 .done-list{
-/* 2 b 2 - list items */
+/* 2 b 1 b - list items */
 }
 .list-item {
     background-color: orangered;
@@ -115,7 +118,7 @@ footer {
 .list-item.dragging {
     opacity: 0.5;
 }
-/* 2 c - menu */
+/* 2 b 2 - menu */
 .menu {
     background-color: steelblue;
     border: 1px solid black;
@@ -125,7 +128,7 @@ footer {
     grid-template-rows: 6fr 4fr;
     grid-gap: 1rem;
 }
-/* 2 c 1 - buttons */
+/* 2 b 3 a - buttons */
 .buttons {
     background-color: rebeccapurple;
     border: 1px solid black;
@@ -135,7 +138,7 @@ footer {
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 1rem;
 }
-/* 2 c 2 - specific buttons */
+/* 2 b 3 b - specific buttons */
 .button {
     background-color: salmon;
     border: 1px solid black;
@@ -147,7 +150,7 @@ footer {
 .load-button {
     
 }
-/* 2 c 3 - create new item */
+/* 2 b 3 c- create new item */
 .create-item-button {
 
 }
@@ -155,4 +158,14 @@ footer {
     background-color: slateblue;
     border: 1px solid black;
     text-align: center;
+}
+/* 2 c - sign up page */
+/* 2 c 1 - sign up form */
+.signup-form{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-wrap: wrap;
 }

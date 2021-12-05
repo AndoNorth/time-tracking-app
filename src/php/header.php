@@ -14,7 +14,7 @@
     <h1>Time Tracking App</h1>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="src/php/signup.php">Sign up</a></li>
-        <li><a href="src/php/login.php">Log in</a></li>  
+        <li><a href="/src/php/signup.php">Sign up</a></li>
+        <li><a href="/src/php/login.php">Log in</a></li>  
     </ul>
 </header>
