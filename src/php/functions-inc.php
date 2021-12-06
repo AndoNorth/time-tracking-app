@@ -98,7 +98,6 @@ function emailExists($conn, $email){
     mysqli_stmt_close($stmt);
 }
 function createUser($conn, $firstName, $lastName, $email, $username, $pwd){
-    $result;
     $sql = "INSERT INTO list_users (firstName, lastName, usersEmail, usersUid, usersPwd) VALUES (?,?,?,?,?);";
     $stmt = mysqli_stmt_init($conn); // use prepared statements to make sign up form secure
     if(!mysqli_stmt_prepare($stmt, $sql)) {

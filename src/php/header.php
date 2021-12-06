@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/css/website_stylesheet.css">
     <link rel="icon" href="/src/time_tracking_16x16.ico"/>
-    <title>Homepage</title>
+    <title>Time Tracking App</title>
 </head>
 <body>
     <div class="page">

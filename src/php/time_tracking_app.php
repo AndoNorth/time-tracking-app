@@ -44,3 +44,8 @@
                     </form>
                 </div>
             </div>
+    <script src="/src/js/time_tracking_app.js" defer></script>
+    <script src="/src/js/create_list_item.js" defer></script>
+    <script src="/src/js/drag_n_drop_item.js" defer></script>
+    <script src="/src/js/save_list_to_db.js" defer></script>
+    <script src="/src/js/load_list_from_db.js" defer></script>

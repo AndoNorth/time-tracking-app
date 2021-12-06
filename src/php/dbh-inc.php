@@ -4,7 +4,7 @@ $serverName = "localhost";
 $dbUserName = "mysqluser";
 $dbPassword = "password123";
 $dbName = "list_database";
-// connect to db
+// connect to db - this is used in other scripts
 $conn = createConnectionToDB($serverName, $dbUserName, $dbPassword, $dbName);
 /* create connetion to DB */
 function createConnectionToDB($serverName, $dbUserName, $dbPassword, $dbName){
