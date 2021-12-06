@@ -10,6 +10,16 @@
             <input type="password" name="pwdRepeat" placeholder="Repeat password...">
             <button type="submit" name="submit">Sign Up</button>
         </form>
+        <?php
+            if(isset($_GET['error'])){
+                if($_GET['error'] == 'emptyinput'){
+                    echo "<p>Fill in all fields</p>";
+                }
+                if($_GET['error'] == 'none'){
+                    echo "<p>Sign up successful</p>";
+                }
+            }
+        ?>
     </section>
 </div>
 <?php include_once 'footer.php';?>

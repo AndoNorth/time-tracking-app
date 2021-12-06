@@ -12,6 +12,17 @@ function emptyInputSignup($firstName, $lastName, $email, $username, $pwd, $pwdRe
     }
     return $result;
 }
+function invalidName($name){
+    $result;
+    // regular expression to only allow letters and numbers
+    if(!preg_match("/^[a-zA-Z]*$/", $name)) {
+        $result = true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
+}
 function invalidUid($username){
     $result;
     // regular expression to only allow letters and numbers
@@ -100,5 +111,38 @@ function createUser($conn, $firstName, $lastName, $email, $username, $pwd){
     mysqli_stmt_close($stmt);
     header("location: /src/php/signup.php?error=none");
     exit();
+}
+function emptyInputLogin($username, $pwd){
+    $result;
+    if(empty($username) || empty($pwd)) {
+        $result = true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
+}
+function loginUser($conn, $username, $pwd) {
+    $uidExists = uidExists($conn, $username);
+    if($uidExists===false){
+        $uidExists = emailExists($conn, $username);
+        if($uidExists===false){
+            header('location: /src/php/login.php?error=wronglogin');
+            exit();
+        }
+    }
+    $pwdHashed = $uidExists["usersPwd"];
+    $checkPwd = password_verify($pwd, $pwdHashed);
+    if($checkPwd === false){
+        header('location: /src/php/login.php?error=wronglogin');
+        exit();        
+    }
+    else if ($checkPwd === true){
+        session_start();
+        $_SESSION["userid"] = $uidExists["usersId"];
+        $_SESSION["useruid"] = $uidExists["usersUid"];
+        header('location: /');
+        exit();
+    }
 }
 ?>

@@ -1,5 +1,12 @@
 <?php include_once 'php/header.php';?>
 <div class="page-contents">
-    <?php include_once 'php/time_tracking_app.php';?>
+    <?php 
+        if(isset($_SESSION["useruid"])){
+            include_once 'php/time_tracking_app.php';
+        }
+        else{
+            echo '<h1>login to view content</h1>';
+        }
+    ?>
 </div>
 <?php include_once 'php/footer.php';?>
