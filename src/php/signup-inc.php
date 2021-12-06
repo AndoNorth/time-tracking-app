@@ -8,24 +8,18 @@ if(isset($_POST["submit"])){
     $username = $_POST["uid"];
     $pwd = $_POST["pwd"];
     $pwdRepeat = $_POST["pwdRepeat"];
-    echo "success"
     // includes
-    /*
-    require_once '/src/php/dbh-inc.php';
-    require_once '/src/php/functions-inc.php';
-    */
-    /*
+    require_once 'dbh-inc.php';
+    require_once 'functions-inc.php';
     // error handling - (!--false, if anything besides false then throw error)
     if(emptyInputSignup($firstName, $lastName, $email, $username, $pwd, $pwdRepeat) !== false){
         header("location: /src/php/signup.php?error=emptyinput");
         exit();
     }
-    echo "empty input successful";
     if(invalidUid($username) !== false){
         header("location: /src/php/signup.php?error=invaliduid");
         exit();
     }
-    echo "it worked";
     if(invalidEmail($email) !== false){
         header("location: /src/php/signup.php?error=invalidemail");
         exit();
@@ -44,7 +38,6 @@ if(isset($_POST["submit"])){
     }
     // if no errors - create user
     createUser($conn, $firstName, $lastName, $email, $username, $pwd);
-    */
 } else {
     header("location: /src/php/signup.php"); // send user back to signup.php
     exit();
