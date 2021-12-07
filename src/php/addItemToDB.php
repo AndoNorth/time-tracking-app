@@ -9,16 +9,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $tag=$_POST['tag'];
     $desc=$_POST['desc'];
     $timestamps=$_POST['timestamps'];
+    require_once 'addItemToDB-inc.php';
+    // error handling for data
     if(emptyInputSignup($userid, $itemName, $tag, $desc, $timestamps) !== false){
         exit("error: bad request");
     }
-    if(userIdExists){
-        
+    if(userIdExists !== false){
+        exit("error: userid doesnt exist");
     }
-    require_once 'addItemToDB-inc.php';
-    // error handling for data
     require_once 'dbh-inc.php';
-    // addListItemToDb();
+    if(listItemExists($userid, $itemName, $tag, $desc) !== false){
+        if(addListItemToDb($userid, $itemName, $tag, $desc) !== false){
+            exit("error: listItem could not be added");
+        }
+    }
+    // check whether time stamp exists
+        // add time stamps to db
 } else {
     exit("error: bad request");
 }
