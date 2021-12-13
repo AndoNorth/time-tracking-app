@@ -1,8 +1,8 @@
 /* global delcalarations */
 :root {
-    --page-size: 5;
-    --page-width: calc(16*var(--page-size, 3));
-    --page-height: calc(10*var(--page-size, 3));
+  --page-size: 5;
+  --page-width: calc(16 * var(--page-size, 3));
+  --page-height: calc(10 * var(--page-size, 3));
 }
 /*
 *, *::after, *::before {
@@ -10,8 +10,8 @@
 }
 */
 body {
-    background-color: darkslategray;
-    color: black;
+  background-color: darkslategray;
+  color: black;
 }
 /* table of contents
     - 1 page container
@@ -30,152 +30,148 @@ body {
 */
 /* 1 - page container */
 .page {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: forestgreen;
-    border: 1px solid black;
-    padding: 1rem;
-    width: calc(var(--page-width, 48)*1rem);
-    height: calc(var(--page-height, 30)*1rem);
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1.5fr 7.5fr 1fr;
-    grid-gap: 1rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: forestgreen;
+  border: 1px solid black;
+  padding: 1rem;
+  width: calc(var(--page-width, 48) * 1rem);
+  height: calc(var(--page-height, 30) * 1rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1.5fr 7.5fr 1fr;
+  grid-gap: 1rem;
 }
 /* 2 - page contents */
 .page-contents {
-    background-color: palegoldenrod;
-    border: 1px solid black;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1fr;
-    grid-gap: 1rem;
+  background-color: palegoldenrod;
+  border: 1px solid black;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 1rem;
 }
 /* 2 a - header & footer */
-header, footer {
-    background-color: palegoldenrod;
-    border: 1px solid black;
+header,
+footer {
+  background-color: palegoldenrod;
+  border: 1px solid black;
 }
 header {
-    padding: 1rem;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
+  padding: 1rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
 }
-header ul li{
-    display:inline;
-    font-size: 1.2rem;
-    padding: 1rem;
+header ul li {
+  display: inline;
+  font-size: 1.2rem;
+  padding: 1rem;
 }
-a:hover{
-    background-color: darkolivegreen;
+a:hover {
+  background-color: darkolivegreen;
 }
 footer {
-    align-self: end;
-    text-align: right;
-    padding: 1rem;
+  align-self: end;
+  text-align: right;
+  padding: 1rem;
 }
 /* 2 b - time tracking app */
 /* 2 b 1 - lists */
 .lists {
-    background-color: red;
-    border: 1px solid black;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-gap: 1rem;
+  background-color: red;
+  border: 1px solid black;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 1rem;
 }
 /* 2 b 1 a - specific lists */
 .list {
-    background-color: seagreen;
-    border: 1px solid black;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 2rem repeat(7, 1fr);
-    grid-gap: 1rem;
-    text-align: center;
+  background-color: seagreen;
+  border: 1px solid black;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2rem repeat(7, 1fr);
+  grid-gap: 1rem;
+  text-align: center;
 }
-.doing-list{
-    
+.doing-list {
 }
-.todo-list{
-
+.todo-list {
 }
-.done-list{
-/* 2 b 1 b - list items */
+.done-list {
+  /* 2 b 1 b - list items */
 }
 .list-item {
-    background-color: orangered;
-    border: 1px solid black;
-    text-align: center;
-    cursor: move;
+  background-color: orangered;
+  border: 1px solid black;
+  text-align: center;
+  cursor: move;
 }
 .list-item.dragging {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 /* 2 b 2 - menu */
 .menu {
-    background-color: steelblue;
-    border: 1px solid black;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 6fr 4fr;
-    grid-gap: 1rem;
+  background-color: steelblue;
+  border: 1px solid black;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 6fr 4fr;
+  grid-gap: 1rem;
 }
 /* 2 b 3 a - buttons */
 .buttons {
-    background-color: rebeccapurple;
-    border: 1px solid black;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 1rem;
+  background-color: rebeccapurple;
+  border: 1px solid black;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 1rem;
 }
 /* 2 b 3 b - specific buttons */
 .button {
-    background-color: salmon;
-    border: 1px solid black;
-    text-align: center;
+  background-color: salmon;
+  border: 1px solid black;
+  text-align: center;
 }
 .save-button {
-
 }
 .load-button {
-    
 }
 /* 2 b 3 c- create new item */
 .create-item-button {
-
 }
 .new-item-form {
-    background-color: slateblue;
-    border: 1px solid black;
-    text-align: center;
+  background-color: slateblue;
+  border: 1px solid black;
+  text-align: center;
 }
 /* 2 c - sign up page */
 /* 2 c 1 - sign up form */
-.signup-form{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-wrap: wrap;
+.signup-form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-wrap: wrap;
 }
 /* 2 d - log in page */
 /* 2 d 1 - log in form */
-.login-form{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-wrap: wrap;
+.login-form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-wrap: wrap;
 }
