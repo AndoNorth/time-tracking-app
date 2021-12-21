@@ -39,7 +39,7 @@
                             <textarea 
                                 form="new-item-form" name="item-desc" id="form-item-desc"
                                 placeholder="Enter Item Description"
-                                style="resize:none;" cols="30" rows="2" maxlength="40"></textarea>
+                                style="resize:none;" cols="30" rows="2" maxlength="40">No Description</textarea>
                         </fieldset>
                     </form>
                 </div>

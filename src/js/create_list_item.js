@@ -88,7 +88,7 @@ function validateFormData(entries) {
           );
           return 1;
         } else if (isKVPUndefined(pair) || pair[1].length == 0) {
-          console.log("error: Item Name is empty");
+          console.log("error: Item Desc is empty");
           return 1;
         }
         break;

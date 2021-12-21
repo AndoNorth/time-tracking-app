@@ -107,7 +107,13 @@ function saveListItemsToSS() {
 }
 /* load list items from local storage */
 function loadListItemsFromLS() {
-  listItems = JSON.parse(localStorage.getItem("listItems"));
+  let listItemsFromLS = JSON.parse(localStorage.getItem("listItems"));
+  let isNull = listItemsFromLS == null;
+  if (isNull) {
+    console.log("listItems from local storage is null");
+    return;
+  }
+  listItems = listItemsFromLS;
   console.log("listItems loaded from local storage");
 }
 /* load list items from session storage */
