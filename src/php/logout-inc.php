@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_unset();
-unset($_COOKIE['userid']);
+setcookie("userid",'',time()-3600,'/','.andonorth.xyz');
 session_destroy();
 header('location: /');
 exit();
