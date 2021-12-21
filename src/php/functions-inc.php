@@ -138,10 +138,41 @@ function loginUser($conn, $username, $pwd) {
     }
     else if ($checkPwd === true){
         session_start();
-        $_SESSION["userid"] = $uidExists["usersId"];
+        ini_set('session.gc_maxlifetime', 60*60*24);
+        $_SESSION["userid"] = $uidExists["userId"];
         $_SESSION["useruid"] = $uidExists["usersUid"];
+        setcookie("userid",$uidExists["userId"],time()+3600*24*365,'/','.andonorth.xyz'); // set cookie for a year
         header('location: /');
         exit();
     }
+    /*
+    // set certain params to last 30 days
+    $params = session_get_cookie_params();
+    setcookie(session_name(), $_COOKIE[session_name()], time() + 60*60*24*30, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+
+
+    // after a successful login do:
+    $_SESSION['user_is_loggedin'] = 1;
+
+    $cookiehash = md5(sha1(username . user_ip));
+    setcookie("uname",$cookiehash,time()+3600*24*365,'/','.yoursite.com');
+
+    $sql = "UPDATE `users` SET `login_session`='$cookiehash' WHERE `user_id`='$uid'";
+
+    function CheckCookieLogin() {
+        $uname = $_COOKIE['uname']; 
+        if (!empty($uname)) {   
+            $sql = "SELECT * FROM `users` WHERE `login_session`='$uname'";
+            $_SESSION['user_is_loggedin'] = 1;
+            $_SESSION['cookie'] = $uname;
+            // reset expiry date
+            setcookie("uname",$uname,time()+3600*24*365,'/','.yoursite.com');
+        }
+    }
+
+    if(!isset($_SESSION['cookie']) && empty($_SESSION['user_is_loggedin'])) {
+        CheckCookieLogin();
+    }
+    */
 }
 ?>

@@ -18,7 +18,7 @@ session_start();
     <ul>
         <li><a href="/">Home</a></li>
         <?php
-        if(isset($_SESSION["useruid"])){
+        if( isset($_SESSION["useruid"]) || isset($_COOKIE["userid"]) ){
             echo '<li><a href="/src/php/profile.php">Profile</a></li>';
             echo '<li><a href="/src/php/logout-inc.php">Log out</a></li>';          
         } else {
