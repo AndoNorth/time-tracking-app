@@ -51,19 +51,6 @@ function createNewListItemObject() {
   console.log("item created");
   return listItem;
 }
-/* create and add list item element to list - affects the DOM */
-function addListItemEleToList(list, listItem) {
-  // create list item element
-  let listItemEle = document.createElement("div");
-  listItemEle.classList.add("list-item");
-  listItemEle.classList.add("draggable");
-  listItemEle.draggable = true;
-  // fill html elements with values
-  listItemEle.innerText = listItem["item-name"];
-  console.log("item added to DOM");
-  list.append(listItemEle);
-  resetFormData();
-}
 /* validate form data, return 0 if successful, else return 1 */
 function validateFormData(entries) {
   // loop through formData
@@ -100,9 +87,4 @@ function validateFormData(entries) {
     }
   }
   return 0;
-}
-/* reset form data */
-function resetFormData() {
-  const form = document.getElementById("new-item-form");
-  form.reset();
 }
