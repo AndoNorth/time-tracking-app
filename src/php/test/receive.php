@@ -8,8 +8,25 @@
 // 1. test receiving POST request data
 $request = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents('php://input'), true);
-echo "data received:\n";
+session_start();
+$uid = $_SESSION["userid"];
+$uuid = $_SESSION["useruid"];
+echo "data received from: UID: $uid, UNAME: $uuid \n";
 var_dump($data);
+// organise listItems into variables
+$itemName=$data['item-name'];
+var_dump($itemName);
+$tag=$data['tag'];
+var_dump($tag);
+$desc=$data['item-desc'];
+var_dump($desc);
+$timestamps=$data['time-stamps'];
+if(!empty($timestamps)){
+    foreach($timestamps as $timestamp){
+        foreach($timestamp as $key => $value)
+        echo "$key :: $value \n";
+    }
+}
 // 2. test writing functionality
 $dir = '../../data';
 if( !file_exists($dir) ) {
