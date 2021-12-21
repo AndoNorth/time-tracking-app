@@ -5,6 +5,7 @@ const MAX_LIST_NAME_LENGTH = 15;
 const MAX_LIST_DESC_LENGTH = 40;
 // min time is list to incur a time stamp
 const MIN_TIME_IN_LIST = 1000 * 60 * 1; // 1000ms, 60 seconds, 1 minutes
+const SAVE_LIST_STATE_TIME = 1000 * 60 * 3; // 1000ms, 60 seconds, 3 minutes
 /**  DOM objects **/
 /* fixed objects */
 const lists = document.querySelectorAll(".list");
@@ -19,6 +20,11 @@ const createNewItemButton = document.querySelector(".create-item-button");
 let listItems = Array();
 /** main app **/
 console.log(currentTime());
+/* load list from local storage */
+loadListItemsFromLS();
+refreshListState();
+/* save list every so often */
+setInterval(saveListItemsToLS, SAVE_LIST_STATE_TIME);
 /** global functions **/
 /*
     function: allows events to be added to new elements which match element selector query
@@ -77,6 +83,37 @@ function doesStringLenExceedVal(string, maxVal) {
 /* check if object is empty */
 function isEmpty(obj) {
   return Object.keys(obj).length === 0;
+}
+/* refresh list state */
+function refreshListState() {
+  // remove all child elements (list-item s)
+  lists.forEach((list) => {
+    list.innerHTML = `${list.id.replace("-", " ")}`;
+  });
+  listItems.forEach((item) => {
+    tarList = document.getElementById(item["list"]);
+    addListItemEleToList(tarList, item);
+  });
+}
+/* save list items to local storage */
+function saveListItemsToLS() {
+  localStorage.setItem("listItems", JSON.stringify(listItems));
+  console.log("listItems saved to local storage");
+}
+/* save list items to session storage */
+function saveListItemsToSS() {
+  sessionStorage.setItem("listItems", JSON.stringify(listItems));
+  console.log("listItems saved to session storage");
+}
+/* load list items from local storage */
+function loadListItemsFromLS() {
+  listItems = JSON.parse(localStorage.getItem("listItems"));
+  console.log("listItems loaded from local storage");
+}
+/* load list items from session storage */
+function loadListItemsFromSS() {
+  listItems = JSON.parse(sessionStorage.getItem("listItems"));
+  console.log("listItems loaded from session storage");
 }
 /** test scripts **/
 /* test creating a new list item and appending it to list element */

@@ -8,14 +8,14 @@ saveButton.addEventListener("click", () => {
 /* send done list to DB */
 function sendDoneItemToDB(listEle, listItems) {
   const listChildren = Array.from(listEle.children);
-  listChildren.forEach((listItem) => {
-    const listItem = findListItemByName(listItem.textContent, listItems);
-    sendListItemToDB(listItem);
+  listChildren.forEach((element) => {
+    const listItem = findListItemByName(element.textContent, listItems);
+    sendListItemToDB(listItem, listItems);
   });
   //var listItem = findListItemByName(listItemEle.innerText, listItems); // reference to element in listItems
 }
 /* using Fetch API to make request to server */
-function sendListItemToDB(listItem) {
+function sendListItemToDB(listItem, listItems) {
   fetch("src/php/addItemToDB.php", {
     method: "POST",
     body: JSON.stringify(listItem),
@@ -27,16 +27,17 @@ function sendListItemToDB(listItem) {
       return response.text();
     })
     /* below is enacted on the returned response.text() */
-    .then((text) => console.log(`RESPONSE: ${text}`))
-    .catch((error) => console.error(`ERROR: ${error}`));
-}
-/* save list items to local storage */
-function saveListItemsToLS() {
-  localStorage.setItem("listItems", JSON.stringify(listItems));
-  console.log("listItems saved to local storage");
-}
-/* save list items to session storage */
-function saveListItemsToSS() {
-  sessionStorage.setItem("listItems", JSON.stringify(listItems));
-  console.log("listItems saved to session storage");
+    .then((text) => {
+      console.log(`RESPONSE: ${text}`);
+      // if successful remove listItem from listItems
+      const index = listItems.indexOf(listItem);
+      if (index > -1) {
+        listItems.splice(index, 1);
+      }
+      refreshListState();
+    })
+    .catch((error) => {
+      console.error(`ERROR: ${error}`);
+    });
+  return listItems;
 }
