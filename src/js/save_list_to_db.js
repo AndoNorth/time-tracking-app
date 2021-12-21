@@ -34,6 +34,7 @@ function sendListItemToDB(listItem, listItems) {
       if (index > -1) {
         listItems.splice(index, 1);
       }
+      saveListItemsToLS();
       refreshListState();
     })
     .catch((error) => {

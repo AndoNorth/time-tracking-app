@@ -51,10 +51,10 @@ function listItemExists($conn, $userid, $itemName, $tag, $desc){
     $resultData = mysqli_stmt_get_result($stmt);
     if(mysqli_fetch_assoc($resultData)){
         mysqli_stmt_close($stmt);
-        return false;
+        return true;
     }
     else{
-        return true;
+        return false;
     }
 }
 // does time stamp exist in DB
@@ -94,6 +94,7 @@ function addListItemToDb($conn, $userid, $itemName, $tag, $desc){
     mysqli_stmt_bind_param($stmt, "isss", $userid, $itemName, $tag, $desc); // ssss = string string string string
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
+    echo "listItem added\n";
     return false;
 }
 // add time stamp to DB
@@ -114,6 +115,7 @@ function addTimeStampToDb($conn, $userid, $itemName, $tag, $desc, $startTime, $e
     mysqli_stmt_bind_param($stmt, "isssss", $userid, $itemName, $tag, $desc, $sstime, $eetime); // ssss = string string string string
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
+    echo "timestamp added\n";
     return false;
 }
 ?>
